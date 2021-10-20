@@ -11,6 +11,7 @@ namespace SortingDojo
             {
                 new BubbleSorter(),
                 new InsertionSorter(),
+                new QuickSorter()
             };
 
             var numbers = new List<int>() { 9, 18, -23, 17, 0, 6, -19, 9, 2, -6, 8, 19, -3, 4, 7, -1 };
