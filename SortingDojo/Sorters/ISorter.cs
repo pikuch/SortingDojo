@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SortingDojo
+namespace SortingDojo.Sorters
 {
     public interface ISorter
     {
