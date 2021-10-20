@@ -21,7 +21,8 @@ namespace SortingDojo
             {
                 var toSort = new List<int>(numbers);
                 sorter.Sort(toSort, out int comparisons, out int switches);
-                Console.WriteLine($"after {sorter}:\n{string.Join(' ', toSort)}");
+                Console.WriteLine($"after {sorter.GetName()} comparisons:{comparisons} switches:{switches}");
+                Console.WriteLine($"{string.Join(' ', toSort)}");
             }
         }
     }

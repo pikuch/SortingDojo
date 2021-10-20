@@ -7,6 +7,9 @@ namespace SortingDojo
         public string GetName() => "Insertionsort";
         public void Sort(IList<int> list, out int comparisons, out int switches)
         {
+            comparisons = 0;
+            switches = 0;
+
             for (int edge = 1; edge < list.Count; edge++)
             {
                 var currentValue = list[edge];
@@ -15,11 +18,12 @@ namespace SortingDojo
                 {
                     list[index + 1] = list[index];
                     index--;
+                    comparisons++;
+                    switches++;
                 }
                 list[index + 1] = currentValue;
+                switches++;
             }
-            comparisons = 0;
-            switches = 0;
         }
     }
 }

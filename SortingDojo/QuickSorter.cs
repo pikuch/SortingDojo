@@ -5,12 +5,16 @@ namespace SortingDojo
     class QuickSorter : ISorter
     {
         public string GetName() => "Quicksort";
+        private int comparisonCounter;
+        private int switchCounter;
 
         public void Sort(IList<int> list, out int comparisons, out int switches)
         {
+            comparisonCounter = 0;
+            switchCounter = 0;
             Qsort(list, 0, list.Count - 1);
-            comparisons = 0;
-            switches = 0;
+            comparisons = comparisonCounter;
+            switches = switchCounter;
         }
 
         private void Qsort(IList<int> list, int low, int high)
@@ -36,6 +40,7 @@ namespace SortingDojo
                 {
                     MakeSwitch(list, index, divisionPoint);
                     divisionPoint++;
+                    comparisonCounter++;
                 }
             }
 
@@ -48,6 +53,7 @@ namespace SortingDojo
             if (index1 != index2)
             {
                 (list[index1], list[index2]) = (list[index2], list[index1]);
+                switchCounter++;
             }
         }
     }

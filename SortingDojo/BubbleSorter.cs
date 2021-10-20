@@ -7,6 +7,9 @@ namespace SortingDojo
         public string GetName() => "Bubblesort";
         public void Sort(IList<int> list, out int comparisons, out int switches)
         {
+            comparisons = 0;
+            switches = 0;
+
             bool changes;
             do
             {
@@ -17,12 +20,11 @@ namespace SortingDojo
                     {
                         changes = true;
                         (list[i], list[i + 1]) = (list[i + 1], list[i]);
+                        comparisons++;
+                        switches++;
                     }
                 }
             } while (changes);
-
-            comparisons = 0;
-            switches = 0;
         }
     }
 }
