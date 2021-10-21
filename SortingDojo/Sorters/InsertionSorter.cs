@@ -5,10 +5,10 @@ namespace SortingDojo.Sorters
     class InsertionSorter : ISorter
     {
         public string GetName() => "Insertionsort";
-        public void Sort(IList<int> list, out int comparisons, out int switches)
+        public void Sort(IList<int> list, out int comparisons, out int writes)
         {
             comparisons = 0;
-            switches = 0;
+            writes = 0;
 
             for (int edge = 1; edge < list.Count; edge++)
             {
@@ -19,10 +19,10 @@ namespace SortingDojo.Sorters
                     list[index + 1] = list[index];
                     index--;
                     comparisons++;
-                    switches++;
+                    writes++;
                 }
                 list[index + 1] = currentValue;
-                switches++;
+                writes++;
             }
         }
     }

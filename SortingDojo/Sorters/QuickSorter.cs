@@ -6,15 +6,15 @@ namespace SortingDojo.Sorters
     {
         public string GetName() => "Quicksort";
         private int comparisonCounter;
-        private int switchCounter;
+        private int writesCounter;
 
-        public void Sort(IList<int> list, out int comparisons, out int switches)
+        public void Sort(IList<int> list, out int comparisons, out int writes)
         {
             comparisonCounter = 0;
-            switchCounter = 0;
+            writesCounter = 0;
             Qsort(list, 0, list.Count - 1);
             comparisons = comparisonCounter;
-            switches = switchCounter;
+            writes = writesCounter;
         }
 
         private void Qsort(IList<int> list, int low, int high)
@@ -53,7 +53,7 @@ namespace SortingDojo.Sorters
             if (index1 != index2)
             {
                 (list[index1], list[index2]) = (list[index2], list[index1]);
-                switchCounter++;
+                writesCounter+=2;
             }
         }
     }

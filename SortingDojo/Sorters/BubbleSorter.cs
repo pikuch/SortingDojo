@@ -5,10 +5,10 @@ namespace SortingDojo.Sorters
     class BubbleSorter : ISorter
     {
         public string GetName() => "Bubblesort";
-        public void Sort(IList<int> list, out int comparisons, out int switches)
+        public void Sort(IList<int> list, out int comparisons, out int writes)
         {
             comparisons = 0;
-            switches = 0;
+            writes = 0;
 
             bool changes;
             do
@@ -21,7 +21,7 @@ namespace SortingDojo.Sorters
                         changes = true;
                         (list[i], list[i + 1]) = (list[i + 1], list[i]);
                         comparisons++;
-                        switches++;
+                        writes+=2;
                     }
                 }
             } while (changes);
