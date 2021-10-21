@@ -80,7 +80,7 @@ namespace SortingDojo
             resultsComparisons[lists[0].Count][sorter.GetName()] = averageComparisons;
             SortBenchmark.averageWrites[lists[0].Count][sorter.GetName()] = averageWrites;
 
-            Console.WriteLine($"\tSorter: {sorter.GetName()} Time: {averageTime:N3}us Comparisons: {averageComparisons:N2} Writes: {averageWrites:N2}");
+            Console.WriteLine($"\tSorter: {sorter.GetName()} Time: {averageTime:N3}us Comparisons: {averageComparisons:N3} Writes: {averageWrites:N3}");
         }
 
         private static void PrintCsv()
@@ -90,7 +90,7 @@ namespace SortingDojo
             sb.Append('n');
             foreach (var key in resultsTime[16].Keys)
             {
-                sb.Append($",{key}");
+                sb.Append($"\t{key}");
             }
             Console.WriteLine(sb.ToString());
 
@@ -100,7 +100,7 @@ namespace SortingDojo
                 sb.Append($"{n}");
                 foreach (var algorithm in resultsTime[n].Keys)
                 {
-                    sb.Append($",{resultsTime[n][algorithm]:N3}");
+                    sb.Append($"\t{resultsTime[n][algorithm]:N3}");
                 }
                 Console.WriteLine(sb.ToString());
             }
@@ -110,7 +110,7 @@ namespace SortingDojo
             sb.Append('n');
             foreach (var key in resultsComparisons[16].Keys)
             {
-                sb.Append($",{key}");
+                sb.Append($"\t{key}");
             }
             Console.WriteLine(sb.ToString());
 
@@ -120,7 +120,7 @@ namespace SortingDojo
                 sb.Append($"{n}");
                 foreach (var algorithm in resultsComparisons[n].Keys)
                 {
-                    sb.Append($",{resultsComparisons[n][algorithm]:N3}");
+                    sb.Append($"\t{resultsComparisons[n][algorithm]:N3}");
                 }
                 Console.WriteLine(sb.ToString());
             }
@@ -130,7 +130,7 @@ namespace SortingDojo
             sb.Append('n');
             foreach (var key in averageWrites[16].Keys)
             {
-                sb.Append($",{key}");
+                sb.Append($"\t{key}");
             }
             Console.WriteLine(sb.ToString());
 
@@ -140,7 +140,7 @@ namespace SortingDojo
                 sb.Append($"{n}");
                 foreach (var algorithm in averageWrites[n].Keys)
                 {
-                    sb.Append($",{averageWrites[n][algorithm]:N3}");
+                    sb.Append($"\t{averageWrites[n][algorithm]:N3}");
                 }
                 Console.WriteLine(sb.ToString());
             }
