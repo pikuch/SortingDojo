@@ -9,22 +9,22 @@ namespace SortingDojo
     static class SortBenchmark
     {
         static Random random = new Random();
-        const int minProblemSizePower = 4;
-        const int maxProblemSizePower = 12;
+        const int minProblemSize = 10;
+        const int maxProblemSize = 10000;
+        const int problemSizeStep = 100;
 
         static Dictionary<int, Dictionary<string, double>> resultsTime = new Dictionary<int, Dictionary<string, double>>();
         static Dictionary<int, Dictionary<string, double>> resultsComparisons = new Dictionary<int, Dictionary<string, double>>();
         static Dictionary<int, Dictionary<string, double>> averageWrites = new Dictionary<int, Dictionary<string, double>>();
         public static void Run(IList<ISorter> sorters)
         {
-            for (int problemSizePower = minProblemSizePower; problemSizePower <= maxProblemSizePower; problemSizePower++)
+            for (int elements = minProblemSize; elements <= maxProblemSize; elements += problemSizeStep)
             {
-                int elements = 1 << problemSizePower;
                 resultsTime[elements] = new Dictionary<string, double>();
                 resultsComparisons[elements] = new Dictionary<string, double>();
                 averageWrites[elements] = new Dictionary<string, double>();
 
-                int repeats = (int)Math.Pow(3, 16 - problemSizePower);
+                int repeats = 300000 / elements;
                 List<List<int>> lists = GenerateRandomLists(elements, repeats);
 
                 Console.WriteLine($"Problem size: {elements}");
@@ -80,7 +80,7 @@ namespace SortingDojo
             resultsComparisons[lists[0].Count][sorter.GetName()] = averageComparisons;
             SortBenchmark.averageWrites[lists[0].Count][sorter.GetName()] = averageWrites;
 
-            Console.WriteLine($"\tSorter: {sorter.GetName()} Time: {averageTime:N3}us Comparisons: {averageComparisons:N3} Writes: {averageWrites:N3}");
+            Console.WriteLine($"\tSorter: {sorter.GetName()} Time: {averageTime:F3}us Comparisons: {averageComparisons:F3} Writes: {averageWrites:F3}");
         }
 
         private static void PrintCsv()
@@ -88,9 +88,9 @@ namespace SortingDojo
             Console.WriteLine("Average times");
             StringBuilder sb = new StringBuilder();
             sb.Append('n');
-            foreach (var key in resultsTime[16].Keys)
+            foreach (var key in resultsTime[minProblemSize].Keys)
             {
-                sb.Append($"\t{key}");
+                sb.Append($",{key}");
             }
             Console.WriteLine(sb.ToString());
 
@@ -100,7 +100,7 @@ namespace SortingDojo
                 sb.Append($"{n}");
                 foreach (var algorithm in resultsTime[n].Keys)
                 {
-                    sb.Append($"\t{resultsTime[n][algorithm]:N3}");
+                    sb.Append($",{resultsTime[n][algorithm]:F3}");
                 }
                 Console.WriteLine(sb.ToString());
             }
@@ -108,9 +108,9 @@ namespace SortingDojo
             Console.WriteLine("Average comparisons");
             sb.Clear();
             sb.Append('n');
-            foreach (var key in resultsComparisons[16].Keys)
+            foreach (var key in resultsComparisons[minProblemSize].Keys)
             {
-                sb.Append($"\t{key}");
+                sb.Append($",{key}");
             }
             Console.WriteLine(sb.ToString());
 
@@ -120,7 +120,7 @@ namespace SortingDojo
                 sb.Append($"{n}");
                 foreach (var algorithm in resultsComparisons[n].Keys)
                 {
-                    sb.Append($"\t{resultsComparisons[n][algorithm]:N3}");
+                    sb.Append($",{resultsComparisons[n][algorithm]:F3}");
                 }
                 Console.WriteLine(sb.ToString());
             }
@@ -128,9 +128,9 @@ namespace SortingDojo
             Console.WriteLine("Average writes");
             sb.Clear();
             sb.Append('n');
-            foreach (var key in averageWrites[16].Keys)
+            foreach (var key in averageWrites[minProblemSize].Keys)
             {
-                sb.Append($"\t{key}");
+                sb.Append($",{key}");
             }
             Console.WriteLine(sb.ToString());
 
@@ -140,7 +140,7 @@ namespace SortingDojo
                 sb.Append($"{n}");
                 foreach (var algorithm in averageWrites[n].Keys)
                 {
-                    sb.Append($"\t{averageWrites[n][algorithm]:N3}");
+                    sb.Append($",{averageWrites[n][algorithm]:F3}");
                 }
                 Console.WriteLine(sb.ToString());
             }
